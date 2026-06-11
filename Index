@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Zone Service - Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .main-title { margin-bottom: 20px; color: #2c3e50; font-weight: bold; font-size: 24px; }
+        .box { background: white; padding: 30px; border-radius: 10px; width: 300px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background: #2c3e50; color: white; border: none; cursor: pointer; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="main-title">Smart Zone Portal</div>
+
+<div id="signup-box" class="box">
+    <h2>Signup</h2>
+    <input type="text" id="s-name" placeholder="Name">
+    <input type="number" id="s-mobile" placeholder="Mobile Number">
+    <input type="email" id="s-email" placeholder="Email ID">
+    <input type="text" id="s-shop" placeholder="Shop Name">
+    <button onclick="signup()">Signup</button>
+    <p>Already have account? <a href="#" onclick="toggleForm()">Login</a></p>
+</div>
+
+<div id="login-box" class="box hidden">
+    <h2>Login</h2>
+    <input type="number" id="l-mobile" placeholder="Mobile Number (Username)">
+    <input type="password" id="l-shop" placeholder="Shop Name (Password)">
+    <button onclick="login()">Login</button>
+    <p>New user? <a href="#" onclick="toggleForm()">Signup</a></p>
+</div>
+
+<script>
+    function toggleForm() {
+        document.getElementById('signup-box').classList.toggle('hidden');
+        document.getElementById('login-box').classList.toggle('hidden');
+    }
+
+    function signup() {
+        let mobile = document.getElementById('s-mobile').value;
+        let shop = document.getElementById('s-shop').value;
+        localStorage.setItem('userMobile', mobile);
+        localStorage.setItem('userShop', shop);
+        alert("Registration Successful!");
+        toggleForm();
+    }
+
+    function login() {
+        let lMobile = document.getElementById('l-mobile').value;
+        let lShop = document.getElementById('l-shop').value;
+        
+        if (lMobile === localStorage.getItem('userMobile') && lShop === localStorage.getItem('userShop')) {
+            alert("Login Successful! Redirecting to Portal...");
+            window.location.href = "http://KP1zCFloCJFSUEv:ioNxFwEOHPKSz6S@localhost:50916/storage/emulated/0/main.html";
+        } else {
+            alert("Invalid Credentials!");
+        }
+    }
+</script>
+
+</body>
+</html>
+
